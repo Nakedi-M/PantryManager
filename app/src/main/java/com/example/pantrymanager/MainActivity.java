@@ -20,7 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import android.content.Intent;
 public class MainActivity extends AppCompatActivity {
 
     private AppDatabase db;
@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity {
         adapter = new PantryAdapter(new PantryAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(PantryItem item) {
-                Toast.makeText(MainActivity.this,
-                        "Edit screen coming next", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+                intent.putExtra(AddEditActivity.EXTRA_ITEM_ID, item.id);
+                startActivity(intent);
             }
 
             @Override
@@ -63,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
         recycler.setAdapter(adapter);
 
         FloatingActionButton fab = findViewById(R.id.fabAdd);
-        fab.setOnClickListener(v -> Toast.makeText(this,
-                "Add screen coming next", Toast.LENGTH_SHORT).show());
+        fab.setOnClickListener(v ->
+                startActivity(new Intent(this, AddEditActivity.class)));
     }
 
     // Reload every time the screen comes back into view
