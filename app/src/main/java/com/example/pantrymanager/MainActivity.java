@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import android.content.Intent;
+import com.example.pantrymanager.data.RecipeSeeder;
 public class MainActivity extends AppCompatActivity {
 
     private AppDatabase db;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         db = AppDatabase.getInstance(this);
+        executor.execute(() -> RecipeSeeder.seedIfEmpty(db));
         textEmpty = findViewById(R.id.textEmpty);
 
         adapter = new PantryAdapter(new PantryAdapter.OnItemClickListener() {
