@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fabAdd);
         fab.setOnClickListener(v ->
                 startActivity(new Intent(this, AddEditActivity.class)));
+
+        NavHelper.setup(this, R.id.nav_pantry);
     }
 
     // Reload every time the screen comes back into view
