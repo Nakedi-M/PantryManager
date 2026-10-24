@@ -18,6 +18,7 @@ import com.example.pantrymanager.data.Recipe;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import android.content.Intent;
 
 public class SuggestedRecipesActivity extends AppCompatActivity {
 
@@ -41,8 +42,11 @@ public class SuggestedRecipesActivity extends AppCompatActivity {
         db = AppDatabase.getInstance(this);
         textEmpty = findViewById(R.id.textEmpty);
 
-        adapter = new RecipeAdapter(recipe -> Toast.makeText(this,
-                "Recipe detail screen coming next", Toast.LENGTH_SHORT).show());
+        adapter = new RecipeAdapter(recipe -> {
+            Intent intent = new Intent(this, RecipeDetailActivity.class);
+            intent.putExtra(RecipeDetailActivity.EXTRA_RECIPE_ID, recipe.id);
+            startActivity(intent);
+        });
 
         RecyclerView recycler = findViewById(R.id.recyclerRecipes);
         recycler.setLayoutManager(new LinearLayoutManager(this));

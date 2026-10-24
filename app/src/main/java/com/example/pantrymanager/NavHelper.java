@@ -2,7 +2,6 @@ package com.example.pantrymanager;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -22,16 +21,10 @@ public class NavHelper {
             // The screen we open highlights its own tab.
             if (id == R.id.nav_pantry) {
                 open(activity, MainActivity.class);
-                return false;
-            }
-            if (id == R.id.nav_suggested) {
+            } else if (id == R.id.nav_suggested) {
                 open(activity, SuggestedRecipesActivity.class);
-                return false;
-            }
-            if (id == R.id.nav_settings) {
-                Toast.makeText(activity, "Settings screen coming soon",
-                        Toast.LENGTH_SHORT).show();
-                return false;
+            } else if (id == R.id.nav_settings) {
+                open(activity, SettingsActivity.class);
             }
             return false;
         });
@@ -43,8 +36,6 @@ public class NavHelper {
         intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
                 | Intent.FLAG_ACTIVITY_NO_ANIMATION);
         activity.startActivity(intent);
-        // Also cancel the leaving animation (may show a strikethrough warning,
-        // which is fine, it still works)
         activity.overridePendingTransition(0, 0);
     }
 }

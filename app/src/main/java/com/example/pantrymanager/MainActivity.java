@@ -76,6 +76,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        // Read the Settings switch each time the screen appears
+        boolean alertsOn = getSharedPreferences(SettingsActivity.PREFS, MODE_PRIVATE)
+                .getBoolean(SettingsActivity.KEY_EXPIRY_ALERTS, true);
+        adapter.setExpiryAlertsEnabled(alertsOn);
         loadItems();
     }
 
